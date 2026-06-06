@@ -2837,26 +2837,31 @@
   .about-info-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 42px;
-    position: relative;
-    z-index: 1;
   }
 
   .about-info-row {
+    position: absolute;
+    left: 0;
+    right: 0;
     display: grid;
     grid-template-columns: 108px minmax(0, 1fr);
     align-items: center;
     gap: 24px;
-    min-height: 40px;
+    min-height: 0;
     font-family: 'IBM Plex Mono', 'JetBrains Mono', monospace;
     padding-left: 64px;
   }
 
-  .about-info-row:nth-child(1),
+  .about-info-row:nth-child(1) {
+    top: calc(70vh - 134px);
+  }
+
   .about-info-row:nth-child(2) {
-    position: relative;
-    top: -2px;
+    top: calc(76.1vh - 139px);
+  }
+
+  .about-info-row:nth-child(3) {
+    top: calc(82vh - 144px);
   }
 
   .about-info-icon {
@@ -3046,6 +3051,18 @@
 
     .about-card-grid-overlay {
       display: none;
+    }
+
+    .about-info-list {
+      position: static;
+      margin-top: 42px;
+      gap: 8px;
+    }
+
+    .about-info-row {
+      position: static;
+      top: auto;
+      min-height: 40px;
     }
 
     .about-inner {
