@@ -432,7 +432,7 @@
     position: relative;
     display: grid;
     grid-template-columns: 58px 1fr;
-    align-items: start;
+    align-items: center;
     gap: 20px;
     min-width: 0;
   }
