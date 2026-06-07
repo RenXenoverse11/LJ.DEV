@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useForm, ValidationError } from '@formspree/react'
 import { SOCIALS } from '@/data/portfolio'
 import StarfieldBackground from '@/components/three/StarfieldBackground'
@@ -103,7 +103,6 @@ function FieldIcon({ type }: { type: FieldIconType }) {
 
 export default function ContactSection() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
   const [state, handleSubmit] = useForm('mykaklod')
 
   return (
@@ -113,7 +112,7 @@ export default function ContactSection() {
       <div className="contact-inner">
         <motion.div
           initial={{ opacity: 0, x: -24 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.55 }}
           className="contact-copy"
         >
@@ -146,7 +145,7 @@ export default function ContactSection() {
 
         <motion.form
           initial={{ opacity: 0, x: 24 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.55, delay: 0.12 }}
           onSubmit={handleSubmit}
           className="contact-form-card"
