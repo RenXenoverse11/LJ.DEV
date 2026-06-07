@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import type { ReactNode } from 'react'
 import GlobeField from '@/components/three/GlobeField'
 import StarfieldBackground from '@/components/three/StarfieldBackground'
 import { SOCIALS as PORTFOLIO_SOCIALS } from '@/data/portfolio'
@@ -26,22 +27,40 @@ const fadeUp = (delay = 0) => ({
 const FEATURES: Array<{
   icon: IconType
   title: string
-  description: string
+  description: ReactNode
 }> = [
   {
     icon: 'bolt',
     title: 'Performance Focused',
-    description: 'I build fast, optimized, and scalable applications.',
+    description: (
+      <>
+        I build fast, optimized, and
+        <br />
+        scalable applications.
+      </>
+    ),
   },
   {
     icon: 'code',
     title: 'Clean & Maintainable Code',
-    description: "Writing clean code that's easy to maintain and scale.",
+    description: (
+      <>
+        Writing clean code that's easy
+        <br />
+        to maintain and scale.
+      </>
+    ),
   },
   {
     icon: 'shield',
     title: 'Secure by Design',
-    description: 'Implementing best practices to keep applications secure.',
+    description: (
+      <>
+        Implementing best practices
+        <br />
+        to keep applications secure.
+      </>
+    ),
   },
   {
     icon: 'user',
@@ -56,7 +75,7 @@ const STATS: Array<{
   label: string
 }> = [
   { icon: 'terminal', value: '20+', label: 'Projects Completed' },
-  { icon: 'rocket', value: '5+', label: 'Years of Experience' },
+  { icon: 'rocket', value: '2+', label: 'Years of Experience' },
   { icon: 'code', value: '15+', label: 'Technologies' },
   { icon: 'cup', value: '∞', label: 'Passion for Building' },
 ]
