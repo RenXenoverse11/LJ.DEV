@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 import StarfieldBackground from '@/components/three/StarfieldBackground'
 
 const ABOUT_TITLE = 'who i am?'
@@ -96,11 +97,23 @@ export default function AboutSection() {
       <StarfieldBackground />
 
       <div className="about-overlay-copy">
-        <div className="about-eyebrow" aria-hidden="true">
+        <motion.div
+          className="about-eyebrow"
+          aria-hidden="true"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           // 01 - ABOUT
-        </div>
+        </motion.div>
 
-        <h2 className="about-title" aria-label={ABOUT_TITLE}>
+        <motion.h2
+          className="about-title"
+          aria-label={ABOUT_TITLE}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.08 }}
+        >
           <span className="about-title-text about-title-text-placeholder" aria-hidden="true">
             <span>who </span>
             <span className="about-title-accent">i am?</span>
@@ -109,9 +122,14 @@ export default function AboutSection() {
             <span>{typedWho}</span>
             <span className="about-title-accent">{typedIam}</span>
           </span>
-        </h2>
+        </motion.h2>
 
-        <div className="about-body">
+        <motion.div
+          className="about-body"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.16 }}
+        >
           <p>
             Computer Engineering student based in Davao City,<br />
             Philippines. I build production-grade web apps that<br />
@@ -124,9 +142,14 @@ export default function AboutSection() {
             bus terminals - to make sure what I build reflects how<br />
             people actually use things.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="about-info-list">
+        <motion.div
+          className="about-info-list"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.24 }}
+        >
           <div className="about-info-row">
             <span className="about-info-icon" aria-hidden="true">
               <svg viewBox="0 0 32 32">
@@ -156,12 +179,18 @@ export default function AboutSection() {
             <span className="about-info-label">INTERESTS</span>
             <span className="about-info-value">Web apps · Game dev · Transit tech</span>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <div className="about-card-grid-overlay" aria-hidden="true">
-        {ABOUT_CARDS.map((card) => (
-          <article key={card.label} className="about-card-copy">
+        {ABOUT_CARDS.map((card, i) => (
+          <motion.article
+            key={card.label}
+            className="about-card-copy"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+          >
             <span className="about-card-copy-accent" aria-hidden="true" />
             <span className="about-card-copy-icon" aria-hidden="true">
               {CARD_ICONS[card.icon]}
@@ -173,16 +202,21 @@ export default function AboutSection() {
                 <span key={line}>{line}</span>
               ))}
             </div>
-          </article>
+          </motion.article>
         ))}
       </div>
 
-      <div className="about-terminal-line">
+      <motion.div
+        className="about-terminal-line"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
         <span className="about-terminal-prompt" aria-hidden="true">&gt;_</span>
         <span className="about-terminal-divider" aria-hidden="true" />
         <span className="about-terminal-copy">Code is how I think. Build is how I solve.</span>
         <a href="#contact" className="about-terminal-cta">Let's build something great →</a>
-      </div>
+      </motion.div>
     </section>
   )
 }

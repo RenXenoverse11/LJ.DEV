@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { BLOG_POSTS } from '@/data/portfolio'
 import StarfieldBackground from '@/components/three/StarfieldBackground'
 
@@ -38,7 +38,6 @@ function BlogIcon({ type }: { type: BlogIconType }) {
 
 export default function BlogSection() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
     <section id="blog" ref={ref} className="blog-section">
@@ -47,7 +46,7 @@ export default function BlogSection() {
       <div className="blog-inner">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="blog-kicker"
         >
@@ -56,7 +55,7 @@ export default function BlogSection() {
 
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="blog-title"
         >
@@ -68,7 +67,7 @@ export default function BlogSection() {
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
           className="blog-summary"
         >
@@ -82,7 +81,7 @@ export default function BlogSection() {
             <motion.article
               key={post.id}
               initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.24 + index * 0.09 }}
               className="blog-post-card"
             >
@@ -132,7 +131,7 @@ export default function BlogSection() {
         {/* Fix #7: "ALL POSTS" is a coming-soon placeholder — rendered as a non-link button */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.58 }}
           className="blog-all-posts blog-all-posts-soon"
           aria-label="More posts coming soon"
