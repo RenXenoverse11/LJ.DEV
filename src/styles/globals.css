@@ -165,8 +165,8 @@
     overflow: hidden;
     padding: 80px 0 20px;
     background:
-      linear-gradient(180deg, #030303 0%, #050505 54%, #070707 100%),
-      #050505;
+      linear-gradient(180deg, #050505 0%, #070707 54%, #080808 100%),
+      #080808;
   }
 
   .hero-landing::before {
@@ -176,8 +176,8 @@
     z-index: 1;
     pointer-events: none;
     background:
-      linear-gradient(90deg, rgba(5, 5, 5, 0.98) 0%, rgba(5, 5, 5, 0.9) 28%, rgba(5, 5, 5, 0.24) 54%, rgba(5, 5, 5, 0) 76%),
-      linear-gradient(180deg, rgba(5, 5, 5, 0) 0%, rgba(5, 5, 5, 0.24) 56%, rgba(5, 5, 5, 0.98) 100%);
+      linear-gradient(90deg, rgba(8, 8, 8, 0.98) 0%, rgba(8, 8, 8, 0.9) 28%, rgba(8, 8, 8, 0.24) 54%, rgba(8, 8, 8, 0) 76%),
+      linear-gradient(180deg, rgba(8, 8, 8, 0) 0%, rgba(8, 8, 8, 0.24) 56%, rgba(8, 8, 8, 0.98) 100%);
   }
 
 
@@ -188,8 +188,8 @@
     z-index: 1;
     pointer-events: none;
     background:
-      linear-gradient(180deg, transparent 0%, rgba(5, 5, 5, 0.2) 46%, rgba(5, 5, 5, 0.9) 72%, #050505 100%),
-      linear-gradient(90deg, rgba(5, 5, 5, 0.12), transparent 42%, rgba(5, 5, 5, 0.16));
+      linear-gradient(180deg, transparent 0%, rgba(8, 8, 8, 0.2) 46%, rgba(8, 8, 8, 0.9) 72%, #080808 100%),
+      linear-gradient(90deg, rgba(8, 8, 8, 0.12), transparent 42%, rgba(8, 8, 8, 0.16));
   }
 
   .hero-globe-canvas {
@@ -923,9 +923,7 @@
     margin-left: calc(50% - 50vw);
     padding: 44px 48px 88px;
     scroll-margin-top: 80px;
-    background:
-      linear-gradient(180deg, rgba(8, 8, 8, 0.9) 0%, #080808 34%, #080808 100%),
-      radial-gradient(circle at 50% -18%, rgba(245, 154, 27, 0.1), transparent 34%);
+    background: #080808;
   }
 
   .projects-section::before {
@@ -1376,9 +1374,7 @@
     min-height: calc(100vh - 80px);
     padding: 28px 38px 24px;
     scroll-margin-top: 80px;
-    background:
-      radial-gradient(circle at 78% 4%, rgba(245, 154, 27, 0.08), transparent 30%),
-      linear-gradient(180deg, #07080b 0%, #080808 100%);
+    background: #080808;
   }
 
   .skills-dot-field {
@@ -1797,9 +1793,7 @@
     min-height: calc(100vh - 80px);
     padding: 46px 60px 54px;
     scroll-margin-top: 80px;
-    background:
-      radial-gradient(circle at 80% 4%, rgba(245, 154, 27, 0.08), transparent 28%),
-      linear-gradient(180deg, #07080b 0%, #080808 100%);
+    background: #080808;
   }
 
   .blog-dot-field {
@@ -2189,9 +2183,7 @@
     min-height: calc(100vh - 80px);
     padding: 50px 86px 70px;
     scroll-margin-top: 80px;
-    background:
-      radial-gradient(circle at 46% 32%, rgba(245, 154, 27, 0.08), transparent 18%),
-      linear-gradient(180deg, #07080b 0%, #080808 100%);
+    background: #080808;
   }
 
   .contact-dot-field {
