@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import ProjectsDataField from '@/components/three/ProjectsDataField'
+import StarfieldBackground from '@/components/three/StarfieldBackground'
 import { PROJECTS } from '@/data/portfolio'
 
 const STATUS_STYLES: Record<string, { label: string; color: string; bg: string }> = {
@@ -15,9 +15,7 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" ref={ref} className="projects-section">
-      <div className="projects-data-field">
-        <ProjectsDataField />
-      </div>
+      <StarfieldBackground />
 
       <div className="projects-inner">
         <div className="projects-heading-row">
@@ -54,11 +52,14 @@ export default function ProjectsSection() {
             </motion.p>
           </div>
 
+          {/* Fix #7: link to GitHub profile instead of self-anchoring */}
           <motion.a
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            href="#projects"
+            href="https://github.com/RenXenoverse11"
+            target="_blank"
+            rel="noopener noreferrer"
             className="projects-view-all"
           >
             VIEW ALL PROJECTS &gt;_

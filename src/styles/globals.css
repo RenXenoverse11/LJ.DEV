@@ -432,7 +432,7 @@
     position: relative;
     display: grid;
     grid-template-columns: 58px 1fr;
-    align-items: start;
+    align-items: center;
     gap: 20px;
     min-width: 0;
   }
@@ -502,7 +502,7 @@
   }
 
   .hero-stat-card {
-    padding: 16px 44px 18px;
+    padding: 16px 32px 18px;
   }
 
   .hero-stat-card strong {
@@ -681,7 +681,7 @@
     }
 
     .hero-stat-card {
-      padding: 24px 26px;
+      padding: 24px 22px;
     }
 
     .hero-tech-list {
@@ -2837,26 +2837,31 @@
   .about-info-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 42px;
-    position: relative;
-    z-index: 1;
   }
 
   .about-info-row {
+    position: absolute;
+    left: 0;
+    right: 0;
     display: grid;
     grid-template-columns: 108px minmax(0, 1fr);
     align-items: center;
     gap: 24px;
-    min-height: 40px;
+    min-height: 0;
     font-family: 'IBM Plex Mono', 'JetBrains Mono', monospace;
     padding-left: 64px;
   }
 
-  .about-info-row:nth-child(1),
+  .about-info-row:nth-child(1) {
+    top: calc(70vh - 134px);
+  }
+
   .about-info-row:nth-child(2) {
-    position: relative;
-    top: -2px;
+    top: calc(76.1vh - 139px);
+  }
+
+  .about-info-row:nth-child(3) {
+    top: calc(82vh - 144px);
   }
 
   .about-info-icon {
@@ -3046,6 +3051,18 @@
 
     .about-card-grid-overlay {
       display: none;
+    }
+
+    .about-info-list {
+      position: static;
+      margin-top: 42px;
+      gap: 8px;
+    }
+
+    .about-info-row {
+      position: static;
+      top: auto;
+      min-height: 40px;
     }
 
     .about-inner {
@@ -3252,4 +3269,84 @@
   50% {
     border-color: transparent;
   }
+}
+
+/* ─── Fix #5: Mobile navigation ─────────────────────────────────────────── */
+
+/* Hamburger button — hidden on desktop, visible on mobile */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid #2a2a38;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.nav-hamburger-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #888896;
+  border-radius: 2px;
+  transition: transform 0.22s ease, opacity 0.22s ease, background 0.22s ease;
+  transform-origin: center;
+}
+
+/* Open state — morphs into X */
+.nav-hamburger-bar--top-open {
+  transform: translateY(7px) rotate(45deg);
+  background: var(--amber);
+}
+.nav-hamburger-bar--mid-open {
+  opacity: 0;
+}
+.nav-hamburger-bar--bot-open {
+  transform: translateY(-7px) rotate(-45deg);
+  background: var(--amber);
+}
+
+/* Desktop: show nav links, hide hamburger */
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex !important;
+  }
+  .nav-hamburger {
+    display: none !important;
+  }
+}
+
+/* Mobile: hide nav links, show hamburger */
+@media (max-width: 767px) {
+  .nav-links {
+    display: none !important;
+  }
+  .nav-hamburger {
+    display: flex !important;
+  }
+  .nav-cta {
+    display: none !important;
+  }
+}
+
+/* Fix #7: muted blog arrow for posts without a URL yet */
+.blog-arrow-muted {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Fix #1: ensure the terminal line CTA is visible and accessible */
+.about-terminal-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }

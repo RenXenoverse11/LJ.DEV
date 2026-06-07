@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { SKILLS } from '@/data/portfolio'
+import StarfieldBackground from '@/components/three/StarfieldBackground'
 
 type SkillCategory = keyof typeof SKILLS
 
@@ -151,7 +152,7 @@ export default function SkillsSection() {
 
   return (
     <section id="skills" ref={ref} className="skills-section">
-      <div className="skills-dot-field" aria-hidden="true" />
+      <StarfieldBackground />
 
       <div className="skills-inner">
         <div className="skills-header">
@@ -228,9 +229,14 @@ export default function SkillsSection() {
                   const skillUrl = SKILL_URLS[skill]
                   const isClickable = skillUrl && skillUrl !== '#'
 
+                  // Fix #8: use <a> for clickable chips — keyboard accessible, correct semantics
+                  const Tag = isClickable ? motion.a : motion.div
                   return (
-                    <motion.div
+                    <Tag
                       key={skill}
+                      {...(isClickable
+                        ? { href: skillUrl, target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={inView ? { opacity: 1, scale: 1 } : {}}
                       transition={{
@@ -238,16 +244,12 @@ export default function SkillsSection() {
                         delay: 0.34 + categoryIndex * 0.06 + skillIndex * 0.025,
                       }}
                       className="skills-chip"
-                      style={isClickable ? { cursor: 'pointer' } : {}}
-                      onClick={() => {
-                        if (isClickable) window.open(skillUrl, '_blank')
-                      }}
                     >
                       <span className="skills-chip-icon">
                         <SkillIcon skill={skill} />
                       </span>
                       <span>{skill}</span>
-                    </motion.div>
+                    </Tag>
                   )
                 })}
               </div>

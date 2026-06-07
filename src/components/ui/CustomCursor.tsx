@@ -35,49 +35,44 @@ export default function CustomCursor() {
       })
     }
 
-    const move = (event: MouseEvent) => {
-      position.current.x = event.clientX
-      position.current.y = event.clientY
+    const INTERACTIVE = 'a, button, input, textarea, select, [role="button"]'
+
+    const move = (e: MouseEvent) => {
+      position.current.x = e.clientX
+      position.current.y = e.clientY
       visible.current = true
       requestUpdate()
     }
-    const leave = () => {
-      visible.current = false
-      requestUpdate()
+    const leave = () => { visible.current = false; requestUpdate() }
+    const enter = () => { visible.current = true; requestUpdate() }
+
+    // Fix #4: use event delegation so dynamically rendered elements are covered
+    const onOver = (e: MouseEvent) => {
+      if ((e.target as Element).closest(INTERACTIVE)) {
+        hovering.current = true
+        requestUpdate()
+      }
     }
-    const enter = () => {
-      visible.current = true
-      requestUpdate()
+    const onOut = (e: MouseEvent) => {
+      if ((e.target as Element).closest(INTERACTIVE)) {
+        hovering.current = false
+        requestUpdate()
+      }
     }
-    const hoverStart = () => {
-      hovering.current = true
-      requestUpdate()
-    }
-    const hoverEnd = () => {
-      hovering.current = false
-      requestUpdate()
-    }
-    const interactive = 'a, button, input, textarea, select, [role="button"], .btn-primary, .btn-ghost'
 
     document.addEventListener('mousemove', move, { passive: true })
     document.addEventListener('mouseleave', leave)
     document.addEventListener('mouseenter', enter)
-
-    const elements = Array.from(document.querySelectorAll(interactive))
-    elements.forEach((element) => {
-      element.addEventListener('mouseenter', hoverStart)
-      element.addEventListener('mouseleave', hoverEnd)
-    })
+    document.addEventListener('mouseover', onOver)
+    document.addEventListener('mouseout', onOut)
 
     return () => {
       if (frame.current !== null) cancelAnimationFrame(frame.current)
       document.removeEventListener('mousemove', move)
       document.removeEventListener('mouseleave', leave)
       document.removeEventListener('mouseenter', enter)
-      elements.forEach((element) => {
-        element.removeEventListener('mouseenter', hoverStart)
-        element.removeEventListener('mouseleave', hoverEnd)
-      })
+      document.removeEventListener('mouseover', onOver)
+      document.removeEventListener('mouseout', onOut)
     }
   }, [])
 

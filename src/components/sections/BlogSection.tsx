@@ -1,10 +1,12 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { BLOG_POSTS } from '@/data/portfolio'
+import StarfieldBackground from '@/components/three/StarfieldBackground'
 
-const POST_ICONS = ['document', 'graduation', 'database'] as const
+// Fix #11: icon type is now driven by data, not array index
+type BlogIconType = 'document' | 'graduation' | 'database'
 
-function BlogIcon({ type }: { type: (typeof POST_ICONS)[number] }) {
+function BlogIcon({ type }: { type: BlogIconType }) {
   if (type === 'graduation') {
     return (
       <svg viewBox="0 0 32 32" aria-hidden="true">
@@ -40,7 +42,7 @@ export default function BlogSection() {
 
   return (
     <section id="blog" ref={ref} className="blog-section">
-      <div className="blog-dot-field" aria-hidden="true" />
+      <StarfieldBackground />
 
       <div className="blog-inner">
         <motion.p
@@ -86,7 +88,8 @@ export default function BlogSection() {
             >
               <div className="blog-post-meta">
                 <div className="blog-post-icon">
-                  <BlogIcon type={POST_ICONS[index] ?? 'document'} />
+                  {/* Fix #11: icon comes from data, not inferred from index */}
+                  <BlogIcon type={post.icon} />
                 </div>
 
                 <div className="blog-post-tag-wrap">
@@ -105,20 +108,34 @@ export default function BlogSection() {
                   <span className="blog-clock" aria-hidden="true" />
                   {post.readTime} read
                 </span>
-                <a href="#" aria-label={`Read ${post.title}`} className="blog-arrow">
-                  &rarr;
-                </a>
+                {/* Fix #7: only render arrow link when a real URL exists */}
+                {post.url ? (
+                  <a
+                    href={post.url}
+                    aria-label={`Read ${post.title}`}
+                    className="blog-arrow"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    &rarr;
+                  </a>
+                ) : (
+                  <span className="blog-arrow blog-arrow-muted" aria-label="Coming soon">
+                    &rarr;
+                  </span>
+                )}
               </div>
             </motion.article>
           ))}
         </div>
 
-        <motion.a
+        {/* Fix #7: "ALL POSTS" is a coming-soon placeholder — rendered as a non-link button */}
+        <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.58 }}
-          href="#"
-          className="blog-all-posts"
+          className="blog-all-posts blog-all-posts-soon"
+          aria-label="More posts coming soon"
         >
           <span className="blog-grid-icon" aria-hidden="true">
             <span />
@@ -130,7 +147,7 @@ export default function BlogSection() {
           <span className="blog-all-arrow" aria-hidden="true">
             &rarr;
           </span>
-        </motion.a>
+        </motion.div>
       </div>
     </section>
   )

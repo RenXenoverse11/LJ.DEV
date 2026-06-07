@@ -57,33 +57,41 @@ export const SKILLS = {
   mobile: ['React Native', 'Flutter', 'Dart', 'Android Studio'],
 }
 
+// Fix #11: icon is now part of the data, not inferred from array index
 export const BLOG_POSTS = [
   {
     id: 'osrm-integration',
     date: '2026-05',
     tag: 'devlog',
+    icon: 'document' as const,
     title: 'Replacing straight-line polylines with real road routing using OSRM',
     excerpt: 'How I integrated a self-hosted OSRM instance into MindaRide to get actual road paths instead of crow-fly lines between stopovers.',
     readTime: '5 min',
+    url: null,
   },
   {
     id: 'svelte5-runes',
     date: '2026-04',
     tag: 'tutorial',
+    icon: 'graduation' as const,
     title: 'Svelte 5 runes vs stores - what actually changed and why it matters',
     excerpt: 'A practical breakdown of the new reactivity model in Svelte 5, from the perspective of someone migrating an existing project.',
     readTime: '7 min',
+    url: null,
   },
   {
     id: 'supabase-auth',
     date: '2026-03',
     tag: 'devlog',
+    icon: 'database' as const,
     title: 'Adding Google OAuth + Magic Link auth to a Vite app with Supabase',
     excerpt: 'Step by step: setting up Supabase Auth, handling the callback route in TanStack Router, and protecting pages without a mess.',
     readTime: '6 min',
+    url: null,
   },
 ]
 
+// Fix #9: single source of truth — HeroSection now imports from here
 export const SOCIALS = [
   { label: 'GitHub', href: 'https://github.com/RenXenoverse11' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/laurence-jan-bagaan-812ba33b7/' },

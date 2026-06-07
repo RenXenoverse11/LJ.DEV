@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import StarfieldBackground from '@/components/three/StarfieldBackground'
 import CircuitField from '@/components/three/CircuitField'
 
 const ABOUT_TITLE = 'who i am?'
@@ -59,6 +60,7 @@ export default function AboutSection() {
 
   return (
     <section id="about" ref={ref} className="about-section">
+      <StarfieldBackground />
       <div className="about-circuit-layer">
         <CircuitField />
       </div>
@@ -126,9 +128,10 @@ export default function AboutSection() {
         ))}
       </div>
 
-      <div className="about-terminal-line" aria-hidden="true">
-        <span className="about-terminal-prompt">&gt;_</span>
-        <span className="about-terminal-divider" />
+      {/* Fix #1: removed aria-hidden from wrapper — it contains a real interactive link */}
+      <div className="about-terminal-line">
+        <span className="about-terminal-prompt" aria-hidden="true">&gt;_</span>
+        <span className="about-terminal-divider" aria-hidden="true" />
         <span className="about-terminal-copy">Code is how I think. Build is how I solve.</span>
         <a href="#contact" className="about-terminal-cta">Let's build something great →</a>
       </div>

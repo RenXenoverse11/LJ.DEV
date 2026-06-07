@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import GlobeField from '@/components/three/GlobeField'
+import StarfieldBackground from '@/components/three/StarfieldBackground'
+import { SOCIALS as PORTFOLIO_SOCIALS } from '@/data/portfolio'
 
 type IconType =
   | 'bolt'
@@ -56,28 +58,23 @@ const STATS: Array<{
   { icon: 'terminal', value: '20+', label: 'Projects Completed' },
   { icon: 'rocket', value: '5+', label: 'Years of Experience' },
   { icon: 'code', value: '15+', label: 'Technologies' },
-  { icon: 'cup', value: '&infin;', label: 'Passion for Building' },
+  { icon: 'cup', value: '∞', label: 'Passion for Building' },
 ]
 
-const SOCIALS: Array<{
-  icon: IconType
-  label: string
-  href: string
-}> = [
-  { icon: 'github', label: 'GitHub', href: 'https://github.com/RenXenoverse11' },
-  {
-    icon: 'upwork',
-    label: 'Upwork',
-    href: 'https://www.upwork.com/freelancers/~01c91551d88f9a1a24?mp_source=share',
-  },
-  {
-    icon: 'linkedin',
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/laurence-jan-bagaan-812ba33b7/',
-  },
-  { icon: 'mail', label: 'Gmail', href: 'mailto:laurencejan1431@gmail.com' },
-  { icon: 'facebook', label: 'Facebook', href: 'https://web.facebook.com/renxen11/' },
-]
+// Fix #9: map from shared SOCIALS so there's a single source of truth
+const LABEL_TO_ICON: Record<string, IconType> = {
+  GitHub: 'github',
+  LinkedIn: 'linkedin',
+  Upwork: 'upwork',
+  Email: 'mail',
+  Facebook: 'facebook',
+}
+
+const SOCIALS = PORTFOLIO_SOCIALS.map((s) => ({
+  icon: (LABEL_TO_ICON[s.label] ?? 'mail') as IconType,
+  label: s.label,
+  href: s.href,
+}))
 
 const TECH_STACK = [
   { name: 'React', icon: 'https://cdn.simpleicons.org/react/61DAFB', href: 'https://react.dev/' },
@@ -203,6 +200,7 @@ function scrollToSection(id: string) {
 export default function HeroSection() {
   return (
     <section id="home" className="hero-landing">
+      <StarfieldBackground leftOnly />
       <GlobeField />
 
       <div className="hero-veil" aria-hidden="true" />
@@ -297,7 +295,7 @@ export default function HeroSection() {
                 <HeroIcon type={stat.icon} />
               </div>
               <div>
-                <strong dangerouslySetInnerHTML={{ __html: stat.value }} />
+                <strong>{stat.value}</strong>
                 <span>{stat.label}</span>
               </div>
             </article>

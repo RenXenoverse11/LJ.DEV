@@ -1,9 +1,15 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { useForm, ValidationError } from '@formspree/react'
+import { SOCIALS } from '@/data/portfolio'
+import StarfieldBackground from '@/components/three/StarfieldBackground'
 
 type ContactIconType = 'email' | 'location' | 'github' | 'linkedin'
 type FieldIconType = 'user' | 'mail' | 'file' | 'edit' | 'send'
+
+// Fix #2: derive display values from the single SOCIALS source of truth
+const githubSocial = SOCIALS.find((s) => s.label === 'GitHub')!
+const linkedinSocial = SOCIALS.find((s) => s.label === 'LinkedIn')!
 
 const CONTACT_ITEMS: Array<{
   icon: ContactIconType
@@ -12,8 +18,8 @@ const CONTACT_ITEMS: Array<{
 }> = [
   { icon: 'email', label: 'Email', value: 'laurencejan1431@gmail.com' },
   { icon: 'location', label: 'Location', value: 'Davao City, Philippines' },
-  { icon: 'github', label: 'GitHub', value: 'github.com/laurencejan' },
-  { icon: 'linkedin', label: 'LinkedIn', value: 'linkedin.com/in/laurencejan' },
+  { icon: 'github', label: 'GitHub', value: githubSocial.href.replace('https://', '') },
+  { icon: 'linkedin', label: 'LinkedIn', value: linkedinSocial.href.replace('https://www.', '') },
 ]
 
 function ContactIcon({ type }: { type: ContactIconType }) {
@@ -102,7 +108,7 @@ export default function ContactSection() {
 
   return (
     <section id="contact" ref={ref} className="contact-section">
-      <div className="contact-dot-field" aria-hidden="true" />
+      <StarfieldBackground />
 
       <div className="contact-inner">
         <motion.div
