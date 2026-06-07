@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import StarfieldBackground from '@/components/three/StarfieldBackground'
 import { PROJECTS } from '@/data/portfolio'
 
@@ -11,7 +11,6 @@ const STATUS_STYLES: Record<string, { label: string; color: string; bg: string }
 
 export default function ProjectsSection() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
     <section id="projects" ref={ref} className="projects-section">
@@ -22,7 +21,7 @@ export default function ProjectsSection() {
           <div>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="projects-kicker"
             >
@@ -31,7 +30,7 @@ export default function ProjectsSection() {
 
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="projects-title"
             >
@@ -43,7 +42,7 @@ export default function ProjectsSection() {
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
               className="projects-summary"
             >
@@ -55,7 +54,7 @@ export default function ProjectsSection() {
           {/* Fix #7: link to GitHub profile instead of self-anchoring */}
           <motion.a
             initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             href="https://github.com/RenXenoverse11"
             target="_blank"
@@ -75,7 +74,7 @@ export default function ProjectsSection() {
               <motion.article
                 key={project.id}
                 initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.25 + i * 0.1 }}
                 className="project-card"
                 whileHover={{ borderColor: '#f59a1b66', translateY: -4 }}

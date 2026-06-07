@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { SKILLS } from '@/data/portfolio'
 import StarfieldBackground from '@/components/three/StarfieldBackground'
 
@@ -148,7 +148,6 @@ function SkillIcon({ skill }: { skill: string }) {
 
 export default function SkillsSection() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
     <section id="skills" ref={ref} className="skills-section">
@@ -159,7 +158,7 @@ export default function SkillsSection() {
           <div className="skills-heading-copy">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="skills-kicker"
             >
@@ -168,7 +167,7 @@ export default function SkillsSection() {
 
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="skills-title"
             >
@@ -180,7 +179,7 @@ export default function SkillsSection() {
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
               className="skills-summary"
             >
@@ -191,7 +190,7 @@ export default function SkillsSection() {
 
           <motion.div
             initial={{ opacity: 0, y: 18 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="skills-build-card"
           >
@@ -210,7 +209,7 @@ export default function SkillsSection() {
             <motion.article
               key={category.key}
               initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.26 + categoryIndex * 0.08 }}
               className="skills-row"
             >
@@ -238,7 +237,7 @@ export default function SkillsSection() {
                         ? { href: skillUrl, target: '_blank', rel: 'noopener noreferrer' }
                         : {})}
                       initial={{ opacity: 0, scale: 0.95 }}
-                      animate={inView ? { opacity: 1, scale: 1 } : {}}
+                      whileInView={{ opacity: 1, scale: 1 }}
                       transition={{
                         duration: 0.28,
                         delay: 0.34 + categoryIndex * 0.06 + skillIndex * 0.025,

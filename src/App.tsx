@@ -1,3 +1,4 @@
+import { MotionConfig } from 'framer-motion'
 import Navbar from '@/components/ui/Navbar'
 import Footer from '@/components/ui/Footer'
 import CustomCursor from '@/components/ui/CustomCursor'
@@ -10,23 +11,25 @@ import ContactSection from '@/components/sections/ContactSection'
 
 export default function App() {
   return (
-    <div style={{ background: '#080808', minHeight: '100vh' }}>
-      <CustomCursor />
-      <Navbar />
+    <MotionConfig reducedMotion="user">
+      <div style={{ background: '#080808', minHeight: '100vh' }}>
+        <CustomCursor />
+        <Navbar />
 
-      <main>
-        <HeroSection />
+        <main>
+          <HeroSection />
 
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <AboutSection />
-          <ProjectsSection />
-          <SkillsSection />
-          <BlogSection />
-          <ContactSection />
-        </div>
-      </main>
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <AboutSection />
+            <ProjectsSection />
+            <SkillsSection />
+            <BlogSection />
+            <ContactSection />
+          </div>
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </MotionConfig>
   )
 }
