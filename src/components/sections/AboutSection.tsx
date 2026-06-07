@@ -4,26 +4,60 @@ import StarfieldBackground from '@/components/three/StarfieldBackground'
 const ABOUT_TITLE = 'who i am?'
 const WHO_END_INDEX = 4
 
+const CARD_ICONS = {
+  rocket: (
+    <svg viewBox="0 0 24 24">
+      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+      <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+    </svg>
+  ),
+  layers: (
+    <svg viewBox="0 0 24 24">
+      <path d="M12 2 2 7l10 5 10-5-10-5z" />
+      <path d="m2 17 10 5 10-5" />
+      <path d="m2 12 10 5 10-5" />
+    </svg>
+  ),
+  pin: (
+    <svg viewBox="0 0 24 24">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  ),
+  cap: (
+    <svg viewBox="0 0 24 24">
+      <path d="M22 10 12 5 2 10l10 5 10-5z" />
+      <path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5" />
+    </svg>
+  ),
+} as const
+
 const ABOUT_CARDS = [
   {
     value: '3+',
     label: 'ACTIVE PROJECTS',
     detail: 'Building and shipping\nreal-world solutions',
+    icon: 'rocket',
   },
   {
     value: 'FULL STACK',
     label: 'DEVELOPER',
     detail: 'React · Supabase · Svelte\nTypeScript · Node.js',
+    icon: 'layers',
   },
   {
     value: 'DAVAO',
     label: 'PHILIPPINES',
     detail: 'Based in PH',
+    icon: 'pin',
   },
   {
     value: '2026',
     label: 'GRADUATING',
     detail: 'Currently studying\nComputer Engineering',
+    icon: 'cap',
   },
 ] as const
 
@@ -128,6 +162,10 @@ export default function AboutSection() {
       <div className="about-card-grid-overlay" aria-hidden="true">
         {ABOUT_CARDS.map((card) => (
           <article key={card.label} className="about-card-copy">
+            <span className="about-card-copy-accent" aria-hidden="true" />
+            <span className="about-card-copy-icon" aria-hidden="true">
+              {CARD_ICONS[card.icon]}
+            </span>
             <div className="about-card-copy-value">{card.value}</div>
             <div className="about-card-copy-label">{card.label}</div>
             <div className="about-card-copy-detail">
