@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import StarfieldBackground from '@/components/three/StarfieldBackground'
-import CircuitField from '@/components/three/CircuitField'
 
 const ABOUT_TITLE = 'who i am?'
 const WHO_END_INDEX = 4
@@ -19,7 +18,7 @@ const ABOUT_CARDS = [
   {
     value: 'DAVAO',
     label: 'PHILIPPINES',
-    detail: 'Based in 🇵🇭',
+    detail: 'Based in PH',
   },
   {
     value: '2026',
@@ -29,7 +28,7 @@ const ABOUT_CARDS = [
 ] as const
 
 export default function AboutSection() {
-  const ref = useRef(null)
+  const ref = useRef<HTMLElement | null>(null)
   const [typedLength, setTypedLength] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
 
@@ -61,9 +60,6 @@ export default function AboutSection() {
   return (
     <section id="about" ref={ref} className="about-section">
       <StarfieldBackground />
-      <div className="about-circuit-layer">
-        <CircuitField />
-      </div>
 
       <div className="about-overlay-copy">
         <div className="about-eyebrow" aria-hidden="true">
@@ -128,7 +124,6 @@ export default function AboutSection() {
         ))}
       </div>
 
-      {/* Fix #1: removed aria-hidden from wrapper — it contains a real interactive link */}
       <div className="about-terminal-line">
         <span className="about-terminal-prompt" aria-hidden="true">&gt;_</span>
         <span className="about-terminal-divider" aria-hidden="true" />

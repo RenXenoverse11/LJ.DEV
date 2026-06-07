@@ -923,7 +923,6 @@
     margin-left: calc(50% - 50vw);
     padding: 44px 48px 88px;
     scroll-margin-top: 80px;
-    border-top: 1px solid #171720;
     background:
       linear-gradient(180deg, rgba(8, 8, 8, 0.9) 0%, #080808 34%, #080808 100%),
       radial-gradient(circle at 50% -18%, rgba(245, 154, 27, 0.1), transparent 34%);
@@ -1377,7 +1376,6 @@
     min-height: calc(100vh - 80px);
     padding: 28px 38px 24px;
     scroll-margin-top: 80px;
-    border-top: 1px solid #171720;
     background:
       radial-gradient(circle at 78% 4%, rgba(245, 154, 27, 0.08), transparent 30%),
       linear-gradient(180deg, #07080b 0%, #080808 100%);
@@ -1799,7 +1797,6 @@
     min-height: calc(100vh - 80px);
     padding: 46px 60px 54px;
     scroll-margin-top: 80px;
-    border-top: 1px solid #171720;
     background:
       radial-gradient(circle at 80% 4%, rgba(245, 154, 27, 0.08), transparent 28%),
       linear-gradient(180deg, #07080b 0%, #080808 100%);
@@ -2192,7 +2189,6 @@
     min-height: calc(100vh - 80px);
     padding: 50px 86px 70px;
     scroll-margin-top: 80px;
-    border-top: 1px solid #171720;
     background:
       radial-gradient(circle at 46% 32%, rgba(245, 154, 27, 0.08), transparent 18%),
       linear-gradient(180deg, #07080b 0%, #080808 100%);
@@ -2600,7 +2596,6 @@
     height: calc(100vh - 80px);
     min-height: calc(100vh - 80px);
     scroll-margin-top: 80px;
-    border-top: 1px solid #1a1a22;
     background: #080808;
   }
 
@@ -2612,8 +2607,7 @@
     pointer-events: none;
     background:
       linear-gradient(to right, rgba(8, 8, 8, 0.12), rgba(8, 8, 8, 0.16) 18%, rgba(8, 8, 8, 0.02) 54%, rgba(8, 8, 8, 0.14)),
-      linear-gradient(to bottom, rgba(8, 8, 8, 0.16), rgba(8, 8, 8, 0.04) 44%, rgba(8, 8, 8, 0.24)),
-      url('../assets/about-section-bg.jpg') center top / 100% 100% no-repeat;
+      linear-gradient(to bottom, rgba(8, 8, 8, 0.16), rgba(8, 8, 8, 0.04) 44%, rgba(8, 8, 8, 0.24));
   }
 
   .about-section::after {
@@ -2635,17 +2629,6 @@
     left: 258px;
     z-index: 2;
     width: 560px;
-  }
-
-  .about-circuit-layer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: min(38vw, 500px);
-    z-index: 1;
-    overflow: hidden;
-    opacity: 1;
   }
 
   .about-card-grid-overlay {
