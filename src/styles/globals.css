@@ -425,6 +425,7 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     min-height: 118px;
     margin-bottom: 14px;
+    margin-top: 24px; 
   }
 
   .hero-feature-card,
