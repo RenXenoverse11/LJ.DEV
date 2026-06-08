@@ -55,7 +55,7 @@ type PreparedPolygon = Bounds & {
   rings: PolygonCoordinates
 }
 
-const LAND_SAMPLE_BOUNDS: Bounds = {
+const VISIBLE_GLOBE_BOUNDS: Bounds = {
   minLon: 34,
   maxLon: 178,
   minLat: -48,
@@ -63,52 +63,16 @@ const LAND_SAMPLE_BOUNDS: Bounds = {
 }
 
 const DETAIL_SAMPLE_BOUNDS: Bounds[] = [
-  // Tiled approach — no overlaps, full Asia-Pacific coverage at detail density
+  // Three large non-adjacent zones — zero internal tile boundaries in visible areas
 
-  // East Asia (China interior, Korea, Japan) — above SE Asia
-  { minLon: 72, maxLon: 147, minLat: 17, maxLat: 55 },
+  // Asia-Pacific main landmass (single pass, no internal splits)
+  { minLon: 68, maxLon: 147, minLat: -12, maxLat: 55 },
 
-  // Indochina + Myanmar (above equator, west of 110)
-  { minLon: 92, maxLon: 110, minLat: 8, maxLat: 17 },
+  // Island SE Asia + Pacific (separate only because non-contiguous lon)
+  { minLon: 112, maxLon: 178, minLat: -48, maxLat: -9 },
 
-  // Thai-Malay peninsula (narrow, 1–8°N)
-  { minLon: 98, maxLon: 105, minLat: 1, maxLat: 8 },
-
-  // Philippines
-  { minLon: 116, maxLon: 128, minLat: 4, maxLat: 21 },
-
-  // Borneo + Sabah/Sarawak
-  { minLon: 108, maxLon: 119, minLat: -5, maxLat: 8 },
-
-  // Sumatra
-  { minLon: 95, maxLon: 108, minLat: -6, maxLat: 6 },
-
-  // Java + Bali
-  { minLon: 105, maxLon: 116, minLat: -9, maxLat: -6 },
-
-  // Sulawesi
-  { minLon: 119, maxLon: 125, minLat: -6, maxLat: 2 },
-
-  // Lesser Sunda (Lombok, Sumbawa, Flores, Timor)
-  { minLon: 115, maxLon: 128, minLat: -11, maxLat: -7 },
-
-  // Maluku / Moluccas
-  { minLon: 124, maxLon: 132, minLat: -8, maxLat: 2 },
-
-  // West Papua
-  { minLon: 130, maxLon: 141, minLat: -9, maxLat: -1 },
-
-  // Papua New Guinea
-  { minLon: 140, maxLon: 152, minLat: -10, maxLat: -1 },
-
-  // Australia
-  { minLon: 112, maxLon: 154, minLat: -44, maxLat: -9 },
-
-  // Indian subcontinent
-  { minLon: 68, maxLon: 92, minLat: 5, maxLat: 28 },
-
-  // Middle East
-  { minLon: 34, maxLon: 60, minLat: 12, maxLat: 38 },
+  // Middle East + West Asia
+  { minLon: 34, maxLon: 68, minLat: 5, maxLat: 55 },
 ]
 
 const NETWORK_NODES = {
@@ -240,7 +204,7 @@ function prepareLandPolygons(collection: LandFeatureCollection) {
       if (!rings[0]?.length) return
 
       const bounds = ringBounds(rings[0])
-      if (!intersectsBounds(bounds, LAND_SAMPLE_BOUNDS)) return
+      if (!intersectsBounds(bounds, VISIBLE_GLOBE_BOUNDS)) return
 
       prepared.push({ ...bounds, rings })
     })
@@ -289,11 +253,11 @@ function addLandSamples(
   step: number,
   jitterScale: number,
 ) {
-  let seed = points.length + 1
+  let seed = 0
 
   for (let lat = bounds.minLat; lat <= bounds.maxLat; lat += step) {
     for (let lon = bounds.minLon; lon <= bounds.maxLon; lon += step) {
-      seed += 1
+      seed = Math.round(lon * 1000) * 10000 + Math.round(lat * 1000)
 
       const sampleLon = lon + (seededNoise(seed) - 0.5) * step * jitterScale
       const sampleLat = lat + (seededNoise(seed + 117) - 0.5) * step * jitterScale
@@ -312,8 +276,7 @@ function buildLandPoints(polygons: PreparedPolygon[], isMobile: boolean) {
   const points: GlobePoint[] = []
   const seen = new Set<string>()
 
-  addLandSamples(points, seen, polygons, LAND_SAMPLE_BOUNDS, isMobile ? 0.92 : 0.58, 0.2)
-
+  // Single uniform pass — no base/detail split to avoid density seams
   DETAIL_SAMPLE_BOUNDS.forEach((bounds) => {
     addLandSamples(points, seen, polygons, bounds, isMobile ? 0.42 : 0.22, 0.1)
   })
